@@ -133,7 +133,7 @@ function updateValues() {
     document.getElementById('money-plus').innerText = `$${income}`;
     document.getElementById('money-minus').innerText = `$${Math.abs(expense)}`;
 
-    renderCharts(income, Math.abs(expense));
+    renderCharts(transactions);
 }
 
 function removeTransaction(id) {
@@ -142,20 +142,20 @@ function removeTransaction(id) {
     init();
 }
 
-function renderCharts(income, expense) {
-    const labels = transactions.map(transaction => transaction.date);
-    const data = transactions.map(transaction => transaction.amount);
+function renderCharts(transactions) {
+    const income = transactions.filter(t => t.amount > 0).reduce((acc, t) => acc + t.amount, 0);
+    const expense = transactions.filter(t => t.amount < 0).reduce((acc, t) => acc + Math.abs(t.amount), 0);
 
     const barCtx = document.getElementById('transactions-chart').getContext('2d');
     if (barChart) barChart.destroy();
     barChart = new Chart(barCtx, {
         type: 'bar',
         data: {
-            labels: labels,
+            labels: transactions.map(t => t.date),
             datasets: [{
                 label: 'Transactions',
-                data: data,
-                backgroundColor: data.map(value => value < 0 ? 'red' : 'green'),
+                data: transactions.map(t => t.amount),
+                backgroundColor: transactions.map(t => t.amount < 0 ? 'red' : 'green'),
                 borderColor: 'black',
                 borderWidth: 1
             }]
@@ -212,5 +212,3 @@ document.getElementById('go-to-signup').addEventListener('click', switchToSignUp
 document.getElementById('transaction-form').addEventListener('submit', addTransaction);
 
 let transactions = [];
-
-
