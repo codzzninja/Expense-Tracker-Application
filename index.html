@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="signup-page" class="container">
+        <h1>Sign Up</h1>
+        <form id="signup-form">
+            <div class="form-control">
+                <label for="signup-username">Username</label>
+                <input type="text" id="signup-username" placeholder="Enter your username">
+            </div>
+            <div class="form-control">
+                <label for="signup-password">Password</label>
+                <input type="password" id="signup-password" placeholder="Enter your password">
+            </div>
+            <button class="btn" type="submit">Sign Up</button>
+        </form>
+        <p>Already have an account? <a href="#" id="go-to-signin">Sign In</a></p>
+    </div>
+
+    <div id="signin-page" class="container" style="display: none;">
+        <h1>Sign In</h1>
+        <form id="signin-form">
+            <div class="form-control">
+                <label for="signin-username">Username</label>
+                <input type="text" id="signin-username" placeholder="Enter your username">
+            </div>
+            <div class="form-control">
+                <label for="signin-password">Password</label>
+                <input type="password" id="signin-password" placeholder="Enter your password">
+            </div>
+            <button class="btn" type="submit">Sign In</button>
+        </form>
+        <p>Don't have an account? <a href="#" id="go-to-signup">Sign Up</a></p>
+    </div>
+
+    <div id="expense-tracker" class="container" style="display: none;">
+        <h1>Expense Tracker</h1>
+        <div class="balance-container">
+            <h2>Your Balance</h2>
+            <h3>$<span id="balance">0.00</span></h3>
+        </div>
+        <div class="income-expense-container">
+            <div>
+                <h4>Income</h4>
+                <p class="money plus">+$<span id="money-plus">0.00</span></p>
+            </div>
+            <div>
+                <h4>Expense</h4>
+                <p class="money minus">-$<span id="money-minus">0.00</span></p>
+            </div>
+        </div>
+        <div class="transaction-container">
+            <h3>Transactions</h3>
+            <ul id="transaction-list"></ul>
+        </div>
+        <div class="add-transaction-container">
+            <h3>Add New Transaction</h3>
+            <form id="transaction-form">
+                <div class="form-control">
+                    <label for="text">Description</label>
+                    <input type="text" id="text" placeholder="Enter description...">
+                </div>
+                <div class="form-control">
+                    <label for="amount">Amount <br> (negative - expense, positive - income)</label>
+                    <input type="number" id="amount" placeholder="Enter amount...">
+                </div>
+                <div class="form-control">
+                    <label for="date">Date</label>
+                    <input type="date" id="date">
+                </div>
+                <button class="btn">Add Transaction</button>
+            </form>
+            <button id="logout-btn" class="btn" style="margin-top: 10px;">Logout</button>
+        </div>
+
+        <div class="chart-container">
+            <h3>Transactions Chart</h3>
+            <canvas id="transactions-chart"></canvas>
+        </div>
+
+        <div class="pie-chart-container">
+            <h3>Expense vs Income</h3>
+            <canvas id="transactions-pie-chart"></canvas>
+        </div>        
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
